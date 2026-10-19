@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Samuel Gallego Bedoya</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Devicons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           VARIABLES Y CONFIGURACIÓN GENERAL
+           ========================================= */
+        :root {
+            --primary-color: #9D4EDD;
+            --secondary-color: #7b2cbf;
+            --bg-dark: #1a1b26;
+            --bg-card: #24283b;
+            --text-light: #a9b1d6;
+            --text-white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        .text-primary-custom { color: var(--primary-color) !important; }
+        .bg-primary-custom { background-color: var(--primary-color) !important; }
+        
+        /* =========================================
+           BARRA DE NAVEGACIÓN
+           ========================================= */
+        .navbar {
+            transition: all 0.3s ease;
+            background-color: transparent;
+            padding: 1.5rem 0;
+        }
+        .navbar.scrolled {
+            background-color: rgba(26, 27, 38, 0.95);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            padding: 0.5rem 0;
+        }
+        .navbar-brand { font-weight: 700; color: var(--text-white) !important; }
+        .nav-link { color: var(--text-light) !important; font-weight: 500; transition: color 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
+
+        /* =========================================
+           SECCIÓN HERO (INICIO)
+           ========================================= */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(26,27,38,1) 0%, rgba(36,40,59,1) 100%);
+        }
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            transition: transform 0.5s ease;
+        }
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
+        }
+
+        /* =========================================
+           SECCIONES GENERALES
+           ========================================= */
+        section { padding: 100px 0; }
+        .section-title {
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Tarjetas (Educación, Proyectos) */
+        .card-custom {
+            background-color: var(--bg-card);
+            border: none;
+            border-radius: 15px;
+            padding: 25px;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        /* =========================================
+           HABILIDADES (SKILLS)
+           ========================================= */
+        .skill-item { margin-bottom: 25px; }
+        .skill-title { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 500; }
+        .progress { height: 10px; background-color: #1f2335; border-radius: 5px; overflow: visible; }
+        .progress-bar { background-color: var(--primary-color); border-radius: 5px; position: relative; }
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: -3px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--text-white);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        .icon-tech { font-size: 2rem; margin-right: 15px; color: var(--primary-color); transition: transform 0.3s; }
+        .icon-tech:hover { transform: scale(1.2); }
+
+        /* =========================================
+           ANIMACIONES SCROLL (FADE IN)
+           ========================================= */
+        .hidden { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .show { opacity: 1; transform: translateY(0); }
+
+        /* =========================================
+           ESTILOS PARA IMPRESIÓN
+           ========================================= */
+        @media print {
+            body { background-color: white; color: black; }
+            .navbar, .btn-custom, #contact form { display: none !important; }
+            section { padding: 20px 0; page-break-inside: avoid; }
+            .card-custom { border: 1px solid #ccc; box-shadow: none; background-color: white; color: black; }
+            h1, h2, h3, h4, h5, h6, .text-primary-custom { color: black !important; }
+            .text-light { color: black !important; }
+            #hero { height: auto; background: none; }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+
+    <!-- NAVEGACIÓN -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#hero">SGB</a>
+            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-link-item"><a class="nav-link" href="#about">Perfil</a></li>
+                    <li class="nav-link-item"><a class="nav-link" href="#education">Formación</a></li>
+                    <li class="nav-link-item"><a class="nav-link" href="#skills">Habilidades</a></li>
+                    <li class="nav-link-item"><a class="nav-link" href="#projects">Proyectos</a></li>
+                    <li class="nav-link-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                </ul>
+                <button class="btn btn-custom ms-lg-3 mt-3 mt-lg-0" onclick="window.print()">
+                    <i class="fas fa-download me-2"></i> Descargar CV
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- INICIO / HERO -->
+    <section id="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1 text-center text-lg-start hidden">
+                    <p class="text-primary-custom fw-bold mb-1">¡Hola! Soy</p>
+                    <h1 class="display-3 fw-bold mb-3">Samuel Gallego Bedoya</h1>
+                    <h2 class="h4 text-light mb-4">Desarrollador de Software Junior | Estudiante ADSO</h2>
+                    <p class="lead mb-4 text-secondary">
+                        Apasionado por la lógica Backend, la arquitectura de bases de datos y el desarrollo de soluciones socio-tecnológicas con impacto comunitario.
+                    </p>
+                    <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                        <a href="#projects" class="btn btn-custom">Ver Proyectos</a>
+                        <a href="#contact" class="btn btn-outline-light rounded-pill px-4 fw-bold">Contactar</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2 text-center mb-5 mb-lg-0 hidden">
+                    <!-- REEMPLAZA LA URL DE LA IMAGEN AQUÍ -->
+                    <img src="https://avatars.githubusercontent.com/u/39722750?v=4" alt="Samuel Gallego" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE MÍ / PERFIL -->
+    <section id="about" class="bg-darker">
+        <div class="container hidden">
+            <h2 class="section-title">Perfil Profesional</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="fs-5">
+                        Desarrollador de Software en formación técnica superior dentro del programa de Análisis y Desarrollo de Software (ADSO) en el <strong>SENA Centro Textil y de Gestión Industrial (CTGI)</strong>.
+                    </p>
+                    <p>
+                        Cuento con experiencia en la formulación, diseño y desarrollo de soluciones tecnológicas orientadas al impacto social. Me especializo en estructuración de bases de datos relacionales y no relacionales, desarrollo Backend y lógica de programación. Poseo habilidades para el trabajo colaborativo, aprendizaje autónomo y resolución de problemas algorítmicos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMACIÓN ACADÉMICA -->
+    <section id="education">
+        <div class="container hidden">
+            <h2 class="section-title">Formación Académica</h2>
+            <div class="row g-4 justify-content-center">
+                <!-- SENA -->
+                <div class="col-md-6">
+                    <div class="card-custom">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary-custom text-white rounded-circle p-3 me-3">
+                                <i class="fas fa-laptop-code fs-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-0">Análisis y Desarrollo de Software (ADSO)</h4>
+                                <p class="text-primary-custom mb-0">SENA CTGI (Ficha 3484008)</p>
+                            </div>
+                        </div>
+                        <p class="text-muted"><i class="far fa-calendar-alt me-2"></i>2025 - Presente | Medellín, Colombia</p>
+                        <p>Enfoque en arquitectura Backend, diseño de bases de datos, lógica de programación y metodologías ágiles de desarrollo de software.</p>
+                    </div>
+                </div>
+                <!-- Bachillerato -->
+                <div class="col-md-6">
+                    <div class="card-custom">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary-custom text-white rounded-circle p-3 me-3">
+                                <i class="fas fa-graduation-cap fs-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-0">Bachiller Académico</h4>
+                                <p class="text-primary-custom mb-0">I.E. Juan Sebastián del CENSA</p>
+                            </div>
+                        </div>
+                        <p class="text-muted"><i class="far fa-calendar-alt me-2"></i>Graduado | Bello, Colombia</p>
+                        <p>Formación académica básica y secundaria con desarrollo de competencias lógicas y analíticas fundamentales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section id="skills" class="bg-darker">
+        <div class="container hidden">
+            <h2 class="section-title">Habilidades y Tecnologías</h2>
+            
+            <div class="row mt-4">
+                <div class="col-12 text-center mb-5">
+                    <!-- Iconos decorativos -->
+                    <i class="devicon-python-plain icon-tech"></i>
+                    <i class="devicon-php-plain icon-tech"></i>
+                    <i class="devicon-javascript-plain icon-tech"></i>
+                    <i class="devicon-mysql-plain icon-tech"></i>
+                    <i class="devicon-git-plain icon-tech"></i>
+                    <i class="devicon-linux-plain icon-tech"></i>
+                </div>
+            </div>
+
+            <div class="row g-5">
+                <!-- Lenguajes y Frontend -->
+                <div class="col-lg-6">
+                    <h3 class="mb-4"><i class="fas fa-code text-primary-custom me-2"></i>Lenguajes & Frontend</h3>
+                    
+                    <div class="skill-item">
+                        <div class="skill-title"><span>Python</span> <span>85%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-title"><span>PHP</span> <span>80%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 80%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-title"><span>JavaScript</span> <span>75%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 75%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-title"><span>HTML5 & CSS3</span> <span>90%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 90%"></div></div>
+                    </div>
+                </div>
+
+                <!-- Bases de Datos y Herramientas -->
+                <div class="col-lg-6">
+                    <h3 class="mb-4"><i class="fas fa-database text-primary-custom me-2"></i>Bases de Datos & Tools</h3>
+                    
+                    <div class="skill-item">
+                        <div class="skill-title"><span>MySQL / MariaDB</span> <span>90%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 90%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-title"><span>PostgreSQL / SQLite</span> <span>80%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 80%"></div></div>
+                    </div>
+                   
+                    <div class="skill-item">
+                        <div class="skill-title"><span>Git & GitHub</span> <span>85%</span></div>
+                        <div class="progress"><div class="progress-bar" style="width: 85%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECTOS DESTACADOS -->
+    <section id="projects">
+        <div class="container hidden">
+            <h2 class="section-title">Proyectos Destacados</h2>
+            
+            <!-- Botones de Filtro (Interactivo) -->
+            <div class="text-center mb-5">
+                <button class="btn btn-outline-light rounded-pill px-4 mx-1 filter-btn active" data-filter="all">Todos</button>
+                <button class="btn btn-outline-light rounded-pill px-4 mx-1 filter-btn" data-filter="web">Plataformas Web</button>
+                <button class="btn btn-outline-light rounded-pill px-4 mx-1 filter-btn" data-filter="backend">Backend & Datos</button>
+            </div>
+
+            <div class="row g-4" id="project-gallery">
+                <!-- Proyecto 1 -->
+                <div class="col-lg-6 project-item web backend">
+                    <div class="card-custom">
+                        <h3 class="h4">🏙️ Mi Ciudad</h3>
+                        <p class="text-primary-custom fw-bold mb-2">Fase II Fondo Emprender SENA</p>
+                        <p>Plataforma digital para el reporte de problemáticas urbanas (vías, residuos) y seguimiento en tiempo real por parte de ciudadanos y autoridades.</p>
+                        <ul class="text-muted small ps-3 mb-3">
+                            <li>Arquitectura de base de datos relacional.</li>
+                            <li>Módulo de verificación de identidad de usuarios.</li>
+                            <li>Dashboard interactivo de novedades comunitarias.</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <span class="badge bg-secondary me-1">Python</span>
+                            <span class="badge bg-secondary me-1">PHP</span>
+                            <span class="badge bg-secondary me-1">MySQL</span>
+                            <span class="badge bg-secondary">JS/HTML/CSS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="col-lg-6 project-item backend web">
+                    <div class="card-custom">
+                        <h3 class="h4">💬 Ciudad GN Chat</h3>
+                        <p class="text-primary-custom fw-bold mb-2">Mensajería y Procesamiento</p>
+                        <p>Aplicación interactiva de mensajería en tiempo real centrada en la interacción ciudadana y la transmisión eficiente de datos.</p>
+                        <ul class="text-muted small ps-3 mb-3">
+                            <li>Interacción fluida y directa entre usuarios.</li>
+                            <li>Gestión y persistencia de datos relacional optimizada.</li>
+                            <li>Integración frontend-backend.</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <span class="badge bg-secondary me-1">Python</span>
+                            <span class="badge bg-secondary me-1">JavaScript</span>
+                            <span class="badge bg-secondary me-1">SQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO E IDIOMAS -->
+    <section id="contact" class="bg-darker">
+        <div class="container hidden">
+            <h2 class="section-title">Contacto & Idiomas</h2>
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <h3 class="mb-4">Información Personal</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><i class="fas fa-map-marker-alt text-primary-custom me-3 fs-5"></i> Bello / Medellín, Antioquia, Colombia</li>
+                        <li class="mb-3"><i class="fas fa-envelope text-primary-custom me-3 fs-5"></i> <a href="mailto:gallegobedoyasamuel8@gmail.com" class="text-light text-decoration-none">gallegobedoyasamuel8@gmail.com</a></li>
+                        <li class="mb-3"><i class="fab fa-github text-primary-custom me-3 fs-5"></i> <a href="https://github.com/gallegobedoyasamuel8-cyber" target="_blank" class="text-light text-decoration-none">github.com/gallegobedoyasamuel8-cyber</a></li>
+                    </ul>
+
+                    <h3 class="mb-3 mt-5">Idiomas</h3>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="fw-bold me-3" style="width: 80px;">Español</span>
+                        <div class="progress flex-grow-1" style="height: 6px;"><div class="progress-bar bg-primary-custom" style="width: 100%"></div></div>
+                        <span class="ms-3 small text-muted">Nativo</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="fw-bold me-3" style="width: 80px;">Inglés</span>
+                        <div class="progress flex-grow-1" style="height: 6px;"><div class="progress-bar bg-primary-custom" style="width: 30%"></div></div>
+                        <span class="ms-3 small text-muted">A2 (Básico)</span>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7">
+                    <div class="card-custom">
+                        <h3 class="mb-4">Envíame un mensaje</h3>
+                        <form onsubmit="event.preventDefault(); alert('¡Gracias por tu mensaje! (Esta es una simulación visual)');">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="Tu Nombre" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control bg-dark text-white border-secondary" placeholder="Tu Correo" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="form-control bg-dark text-white border-secondary" rows="4" placeholder="Tu Mensaje" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-custom w-100">Enviar Mensaje</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-4 bg-dark">
+        <p class="mb-0 text-muted small">© 2026 Samuel Gallego Bedoya. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (Includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // 1. Cambio de estilo de la barra de navegación al hacer scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Animaciones al hacer scroll (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target); // Dejar de observar una vez animado
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.hidden').forEach((element) => {
+            observer.observe(element);
+        });
+
+        // 3. Sistema de Filtro de Proyectos
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remover clase active de todos los botones
+                filterBtns.forEach(b => b.classList.remove('active', 'bg-primary-custom', 'text-white'));
+                // Agregar clase active al botón clickeado
+                btn.classList.add('active', 'bg-primary-custom', 'text-white');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectItems.forEach(item => {
+                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                        item.style.display = 'block';
+                        // Pequeña animación de reaparición
+                        item.style.opacity = '0';
+                        setTimeout(() => item.style.opacity = '1', 50);
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
